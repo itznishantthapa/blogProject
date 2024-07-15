@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Posts</title>
+    <style>
+        * {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 70%;
+            background-color: #fff;
+            padding: 2rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 1rem;
+            margin-top: 2rem;
+        }
+
+        .blog-container {
+            border: 1px solid #ddd;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            background-color: #fff;
+        }
+
+        .blog-container:hover {
+            transform: translateY(-5px);
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        span {
+            font-size: 0.875rem;
+            color: #999;
+        }
+
+        .create-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin-bottom: 1rem;
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            font-size: 1rem;
+        }
+
+        .create-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <h1>Blog Posts</h1>
+        <a href="{% url 'blog_create' %}" class="create-button">Create New Blog</a>
+
+        {% for blog in blogs %}
+        <li class="blog-container">
+            <div>
+                <a href="{% url 'blog_edit' blog.pk %}">{{ blog.title }}</a>
+                <p>{{ blog.description }}</p>
+                <span>{{ blog.author }} | {{ blog.created_at }}</span>
+            </div>
+        </li>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
